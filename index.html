@@ -1,1 +1,1646 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Roman FK</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root{
+    --light:#38bdf8;
+    --blue:#0ea5e9;
+    --dark:#075985;
+    --navy:#0f172a;
+    --gray:#64748b;
+    --white:#fff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#fff;
+    color:var(--navy);
+    overflow-x:hidden;
+}
+
+/* ARKA PLAN */
+
+.bg{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    z-index:-10;
+    filter:blur(130px);
+}
+
+.bg1{
+    width:520px;
+    height:520px;
+    background:var(--light);
+    opacity:.12;
+    top:-280px;
+    left:-220px;
+    animation:bg1 10s ease-in-out infinite alternate;
+}
+
+.bg2{
+    width:500px;
+    height:500px;
+    background:var(--dark);
+    opacity:.08;
+    right:-240px;
+    bottom:-250px;
+    animation:bg2 12s ease-in-out infinite alternate;
+}
+
+@keyframes bg1{
+    from{transform:translate(0,0)}
+    to{transform:translate(140px,100px)}
+}
+
+@keyframes bg2{
+    from{transform:translate(0,0)}
+    to{transform:translate(-120px,-100px)}
+}
+
+/* NAVBAR */
+
+nav{
+    position:fixed;
+    top:14px;
+    left:50%;
+    transform:translateX(-50%);
+    width:90%;
+    max-width:1200px;
+    height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    background:rgba(255,255,255,.88);
+    backdrop-filter:blur(20px);
+    border:1px solid #e2e8f0;
+    border-radius:20px;
+    box-shadow:0 12px 40px rgba(15,23,42,.08);
+    z-index:1000;
+}
+
+.brand{
+    font-size:21px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.brand span{
+    color:var(--dark);
+}
+
+.navLinks{
+    display:flex;
+    gap:25px;
+}
+
+.navLinks a{
+    color:var(--navy);
+    text-decoration:none;
+    font-size:11px;
+    font-weight:800;
+    transition:.3s;
+}
+
+.navLinks a:hover{
+    color:var(--blue);
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:130px 20px 80px;
+    position:relative;
+    overflow:hidden;
+}
+
+.heroContent{
+    position:relative;
+    z-index:10;
+    animation:heroIn 1.2s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes heroIn{
+    from{
+        opacity:0;
+        transform:translateY(60px) scale(.94);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* ENERJİ HALKALARI */
+
+.energy{
+    position:absolute;
+    left:50%;
+    top:50%;
+    border-radius:50%;
+    border:1px solid rgba(14,165,233,.25);
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+}
+
+.energy1{
+    width:350px;
+    height:350px;
+    animation:ring1 5s ease-in-out infinite;
+}
+
+.energy2{
+    width:520px;
+    height:520px;
+    animation:ring2 7s ease-in-out infinite;
+}
+
+.energy3{
+    width:720px;
+    height:720px;
+    animation:ring3 9s ease-in-out infinite;
+}
+
+@keyframes ring1{
+    0%,100%{
+        opacity:.15;
+        transform:translate(-50%,-50%) scale(.85) rotate(0);
+    }
+    50%{
+        opacity:.6;
+        transform:translate(-50%,-50%) scale(1) rotate(180deg);
+    }
+}
+
+@keyframes ring2{
+    0%,100%{
+        opacity:.1;
+        transform:translate(-50%,-50%) scale(.9) rotate(0);
+    }
+    50%{
+        opacity:.4;
+        transform:translate(-50%,-50%) scale(1.04) rotate(-180deg);
+    }
+}
+
+@keyframes ring3{
+    0%,100%{
+        opacity:.05;
+        transform:translate(-50%,-50%) scale(.9);
+    }
+    50%{
+        opacity:.2;
+        transform:translate(-50%,-50%) scale(1.03);
+    }
+}
+
+/* LOGO */
+
+.mainLogo{
+    width:230px;
+    height:230px;
+    object-fit:contain;
+    filter:
+        drop-shadow(0 0 12px rgba(56,189,248,.3))
+        drop-shadow(0 20px 35px rgba(7,89,133,.15));
+    animation:logoFloat 4s ease-in-out infinite;
+    transition:.4s;
+}
+
+.mainLogo:hover{
+    transform:scale(1.08);
+    filter:drop-shadow(0 0 25px rgba(56,189,248,.8));
+}
+
+@keyframes logoFloat{
+    0%,100%{
+        transform:translateY(0) rotate(0);
+    }
+    50%{
+        transform:translateY(-14px) rotate(2deg);
+    }
+}
+
+/* ROMAN FK */
+
+.romanTitle{
+    margin-top:15px;
+    font-size:clamp(55px,10vw,115px);
+    line-height:.95;
+    font-weight:900;
+    letter-spacing:5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #38bdf8,
+            #ffffff,
+            #0ea5e9,
+            #ffffff,
+            #38bdf8
+        );
+
+    background-size:300% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:
+        waveText 4s linear infinite,
+        titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes waveText{
+    0%{background-position:0% center}
+    50%{background-position:100% center}
+    100%{background-position:0% center}
+}
+
+@keyframes titlePulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.025)}
+}
+
+/* ÇİZGİ */
+
+.blueLine{
+    width:90px;
+    height:5px;
+    margin:25px auto;
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--light),
+            var(--dark),
+            var(--light)
+        );
+
+    box-shadow:0 0 18px rgba(56,189,248,.45);
+
+    animation:linePulse 2.5s ease-in-out infinite;
+}
+
+@keyframes linePulse{
+    0%,100%{
+        width:80px;
+        opacity:.7;
+    }
+    50%{
+        width:180px;
+        opacity:1;
+    }
+}
+
+.heroSubtitle{
+    color:var(--gray);
+    font-size:15px;
+    font-weight:700;
+    letter-spacing:3px;
+}
+
+/* BUTONLAR */
+
+.buttons{
+    margin-top:32px;
+}
+
+.btn{
+    position:relative;
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    padding:16px 30px;
+    margin:5px;
+    border-radius:50px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:900;
+    overflow:hidden;
+    transition:.35s;
+}
+
+.instagram{
+    color:#fff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--light),
+            var(--dark)
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(7,89,133,.25);
+}
+
+.instagram:hover{
+    transform:translateY(-7px) scale(1.04);
+    box-shadow:
+        0 20px 55px
+        rgba(7,89,133,.35);
+}
+
+.instagram::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:70%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.7),
+            transparent
+        );
+
+    transform:skewX(-20deg);
+    animation:shine 3s infinite;
+}
+
+@keyframes shine{
+    0%{left:-120%}
+    45%{left:140%}
+    100%{left:140%}
+}
+
+.explore{
+    color:var(--navy);
+    background:#fff;
+    border:1px solid #dbe4ec;
+}
+
+.explore:hover{
+    background:var(--navy);
+    color:#fff;
+    transform:translateY(-7px);
+}
+
+/* SECTIONS */
+
+section{
+    padding:110px 7%;
+}
+
+.sectionTitle{
+    text-align:center;
+    font-size:42px;
+    font-weight:900;
+    margin-bottom:55px;
+}
+
+.sectionTitle span{
+    color:var(--dark);
+}
+
+/* HAKKIMIZDA */
+
+.about{
+    max-width:1050px;
+    margin:auto;
+}
+
+.aboutCard{
+    position:relative;
+    padding:55px;
+    background:rgba(255,255,255,.96);
+    border:1px solid #e2e8f0;
+    border-radius:30px;
+    box-shadow:0 25px 70px rgba(15,23,42,.08);
+    overflow:hidden;
+
+    opacity:0;
+    transform:translateY(50px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        box-shadow .4s;
+}
+
+.aboutCard.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.aboutCard:hover{
+    box-shadow:
+        0 35px 90px
+        rgba(7,89,133,.13);
+}
+
+.aboutCard::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:7px;
+    height:100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--light),
+            var(--dark)
+        );
+}
+
+.aboutCard h2{
+    font-size:31px;
+    margin-bottom:25px;
+}
+
+.aboutCard h2 span{
+    color:var(--dark);
+}
+
+.aboutText{
+    color:#475569;
+    font-size:15px;
+    line-height:2;
+    font-weight:500;
+}
+
+/* KURUCU */
+
+.founder{
+    margin-top:35px;
+    text-align:center;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--dark),
+            var(--light),
+            #ffffff,
+            var(--light),
+            var(--dark)
+        );
+
+    background-size:300% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:waveText 4s linear infinite;
+}
+
+.founderTitle{
+    text-align:center;
+    margin-top:9px;
+    color:var(--dark);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:3px;
+}
+
+/* KEM LİGİ */
+
+.league{
+    margin-top:30px;
+    position:relative;
+    padding:50px 30px;
+    text-align:center;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f0f9ff
+        );
+
+    border:1px solid #bae6fd;
+
+    box-shadow:
+        0 20px 60px
+        rgba(14,165,233,.10);
+
+    overflow:hidden;
+
+    opacity:0;
+    transform:translateY(50px);
+
+    transition:.8s;
+}
+
+.league.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.league::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    border:1px solid rgba(14,165,233,.2);
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    animation:leagueRing 4s linear infinite;
+}
+
+@keyframes leagueRing{
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(0)
+            scale(.8);
+        opacity:.2;
+    }
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(360deg)
+            scale(1.2);
+        opacity:.7;
+    }
+}
+
+.leagueIcon{
+    font-size:55px;
+    margin-bottom:15px;
+    position:relative;
+    z-index:2;
+}
+
+.league h2{
+    position:relative;
+    z-index:2;
+    font-size:clamp(25px,5vw,45px);
+    font-weight:900;
+    color:var(--dark);
+}
+
+.league p{
+    position:relative;
+    z-index:2;
+    margin-top:12px;
+    color:var(--gray);
+    font-size:14px;
+}
+
+/* TAKIM KARTLARI */
+
+.cards{
+    margin-top:30px;
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:20px;
+}
+
+.card{
+    position:relative;
+    padding:35px 20px;
+    text-align:center;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:22px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(15,23,42,.04);
+
+    overflow:hidden;
+
+    opacity:0;
+    transform:translateY(50px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease,
+        .4s;
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-12px);
+    border-color:var(--light);
+
+    box-shadow:
+        0 25px 60px
+        rgba(14,165,233,.15);
+}
+
+.card::after{
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:50%;
+    height:300%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.9),
+            transparent
+        );
+
+    transform:rotate(25deg);
+
+    transition:.8s;
+}
+
+.card:hover::after{
+    left:150%;
+}
+
+.cardIcon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.card h3{
+    color:var(--dark);
+}
+
+.card p{
+    color:var(--gray);
+    font-size:13px;
+    margin-top:8px;
+}
+
+/* İSTATİSTİK */
+
+.stats{
+    padding:100px 7%;
+    background:#fff;
+}
+
+.statsGrid{
+    max-width:900px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:25px;
+}
+
+.statCard{
+    position:relative;
+    text-align:center;
+
+    padding:45px 25px;
+
+    background:#fff;
+
+    border:1px solid #dbeafe;
+
+    border-radius:25px;
+
+    box-shadow:
+        0 20px 50px
+        rgba(7,89,133,.08);
+
+    overflow:hidden;
+
+    transition:.4s;
+}
+
+.statCard:hover{
+    transform:translateY(-10px);
+
+    border-color:var(--light);
+
+    box-shadow:
+        0 30px 70px
+        rgba(14,165,233,.16);
+}
+
+.statIcon{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.statNumber{
+    font-size:48px;
+    font-weight:900;
+    color:var(--dark);
+}
+
+.statText{
+    margin-top:8px;
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:var(--gray);
+}
+
+/* SAAT */
+
+.clockSection{
+    text-align:center;
+    background:#f8fafc;
+
+    border-top:
+        1px solid #e2e8f0;
+
+    border-bottom:
+        1px solid #e2e8f0;
+}
+
+.clock{
+    font-size:clamp(42px,8vw,72px);
+    font-weight:900;
+    letter-spacing:6px;
+    color:var(--navy);
+}
+
+.clock span{
+    color:var(--blue);
+}
+
+.date{
+    margin-top:12px;
+    color:var(--gray);
+    font-size:15px;
+    font-weight:600;
+}
+
+/* INSTAGRAM */
+
+.instagramSection{
+    padding:110px 7%;
+}
+
+.instagramBox{
+    position:relative;
+    max-width:950px;
+    margin:auto;
+
+    padding:75px 30px;
+
+    text-align:center;
+
+    color:#fff;
+
+    border-radius:32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--navy),
+            var(--dark)
+        );
+
+    overflow:hidden;
+
+    box-shadow:
+        0 30px 80px
+        rgba(7,89,133,.2);
+
+    opacity:0;
+    transform:translateY(50px);
+
+    transition:.8s;
+}
+
+.instagramBox.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.instagramBox::before{
+    content:"";
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    background:var(--light);
+
+    filter:blur(120px);
+
+    opacity:.2;
+
+    right:-200px;
+    top:-250px;
+
+    animation:
+        instaGlow
+        6s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes instaGlow{
+    from{
+        transform:translate(0,0);
+    }
+    to{
+        transform:translate(-100px,120px);
+    }
+}
+
+.instagramBox h2{
+    position:relative;
+    z-index:2;
+    font-size:40px;
+    font-weight:900;
+}
+
+.instagramBox h2 span{
+    color:var(--light);
+}
+
+.instagramBox p{
+    position:relative;
+    z-index:2;
+    margin:18px 0 30px;
+    color:#cbd5e1;
+}
+
+/* FOOTER */
+
+footer{
+    padding:35px 20px;
+    text-align:center;
+
+    border-top:
+        1px solid #e2e8f0;
+
+    color:var(--gray);
+
+    font-size:13px;
+}
+
+footer strong{
+    color:var(--dark);
+}
+
+/* MOBİL */
+
+@media(max-width:750px){
+
+    nav{
+        top:8px;
+        width:94%;
+        height:65px;
+        padding:0 20px;
+    }
+
+    .navLinks{
+        display:none;
+    }
+
+    .brand{
+        font-size:19px;
+    }
+
+    .hero{
+        padding:110px 20px 70px;
+    }
+
+    .mainLogo{
+        width:175px;
+        height:175px;
+    }
+
+    .romanTitle{
+        font-size:57px;
+        letter-spacing:2px;
+    }
+
+    .heroSubtitle{
+        font-size:10px;
+        letter-spacing:1.5px;
+    }
+
+    .energy1{
+        width:280px;
+        height:280px;
+    }
+
+    .energy2{
+        width:400px;
+        height:400px;
+    }
+
+    .energy3{
+        width:520px;
+        height:520px;
+    }
+
+    section{
+        padding:80px 20px;
+    }
+
+    .sectionTitle{
+        font-size:33px;
+    }
+
+    .aboutCard{
+        padding:40px 28px;
+    }
+
+    .aboutCard h2{
+        font-size:26px;
+    }
+
+    .aboutText{
+        font-size:14px;
+        line-height:1.9;
+    }
+
+    .founder{
+        font-size:21px;
+    }
+
+    .league{
+        padding:45px 20px;
+    }
+
+    .league h2{
+        font-size:27px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    .statsGrid{
+        grid-template-columns:1fr;
+    }
+
+    .statNumber{
+        font-size:40px;
+    }
+
+    .clock{
+        font-size:43px;
+        letter-spacing:2px;
+    }
+
+    .instagramBox{
+        padding:55px 20px;
+    }
+
+    .instagramBox h2{
+        font-size:30px;
+    }
+
+    .btn{
+        width:90%;
+        margin:6px auto;
+    }
+}
+
+@media(max-width:400px){
+
+    .romanTitle{
+        font-size:46px;
+    }
+
+    .mainLogo{
+        width:145px;
+        height:145px;
+    }
+
+    .clock{
+        font-size:35px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg bg1"></div>
+<div class="bg bg2"></div>
+
+<nav>
+
+    <div class="brand">
+        ROMAN <span>FK</span>
+    </div>
+
+    <div class="navLinks">
+
+        <a href="#anasayfa">ANA SAYFA</a>
+        <a href="#hakkimizda">HAKKIMIZDA</a>
+        <a href="#lig">KEM LİGİ</a>
+        <a href="#istatistik">İSTATİSTİK</a>
+        <a href="#saat">SAAT</a>
+        <a href="#instagram">INSTAGRAM</a>
+
+    </div>
+
+</nav>
+
+<section class="hero" id="anasayfa">
+
+    <div class="energy energy1"></div>
+    <div class="energy energy2"></div>
+    <div class="energy energy3"></div>
+
+    <div class="heroContent">
+
+        <img
+            src="logo.png"
+            class="mainLogo"
+            alt="Roman FK Logo"
+        >
+
+        <h1 class="romanTitle">
+            ROMAN FK
+        </h1>
+
+        <div class="blueLine"></div>
+
+        <p class="heroSubtitle">
+            FUTBOL • MÜCADELE • TAKIM RUHU
+        </p>
+
+        <div class="buttons">
+
+            <a
+                href="https://www.instagram.com/romanfk3535/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn instagram"
+            >
+                📸 INSTAGRAM'A GİT
+            </a>
+
+            <a
+                href="#hakkimizda"
+                class="btn explore"
+            >
+                KULÜBÜ KEŞFET
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="hakkimizda">
+
+    <h2 class="sectionTitle">
+        HOŞ <span>GELDİNİZ</span>
+    </h2>
+
+    <div class="about">
+
+        <div class="aboutCard">
+
+            <h2>
+                Hoş <span>Geldiniz</span>
+            </h2>
+
+            <p class="aboutText">
+
+                MERHABALAR BİZ ROMAN FK.
+                BİZ YENİ NESİL İZMİR KEMALPAŞA
+                İÇİNDE BİR TAKIMIZ.
+
+                BİZ TAKIMIMIZA AZİMLİ MAÇ OYNAMAK,
+                MAÇI HAKKIMIZLA KAZANMAYI VE
+                KEM LİGİNDE MÜCADELE ETMEK İSTİYORUZ.
+
+                UMARIM BU TAKIMI SEVERSİNİZ,
+                BEĞENİRSİNİZ.
+
+            </p>
+
+            <div class="founder">
+                DORUK KERİM CAN
+            </div>
+
+            <div class="founderTitle">
+                ROMAN FK KURUCUSU
+            </div>
+
+        </div>
+
+        <div class="league" id="lig">
+
+            <div class="leagueIcon">
+                ⚽
+            </div>
+
+            <h2>
+                KEM LİGİNDE MÜCADELE
+            </h2>
+
+            <p>
+                Roman FK olarak KEM LİGİNDE mücadele ediyoruz.
+            </p>
+
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    ⚽
+                </div>
+
+                <h3>
+                    FUTBOL
+                </h3>
+
+                <p>
+                    Futbol bizim tutkumuz.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    🔥
+                </div>
+
+                <h3>
+                    MÜCADELE
+                </h3>
+
+                <p>
+                    Son düdüğe kadar mücadele.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <div class="cardIcon">
+                    🏆
+                </div>
+
+                <h3>
+                    HEDEF
+                </h3>
+
+                <p>
+                    Her zaman daha iyisi.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="stats" id="istatistik">
+
+    <h2 class="sectionTitle">
+        ROMAN <span>FK İSTATİSTİK</span>
+    </h2>
+
+    <div class="statsGrid">
+
+        <div class="statCard">
+
+            <div class="statIcon">
+                👁️
+            </div>
+
+            <div
+                class="statNumber"
+                id="visitorCount"
+            >
+                0
+            </div>
+
+            <div class="statText">
+                TOPLAM ZİYARETÇİ
+            </div>
+
+        </div>
+
+        <div class="statCard">
+
+            <div class="statIcon">
+                🟢
+            </div>
+
+            <div
+                class="statNumber"
+                id="onlineCount"
+            >
+                0
+            </div>
+
+            <div class="statText">
+                ŞU ANDA SİTEDE
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="clockSection" id="saat">
+
+    <h2 class="sectionTitle">
+        CANLI <span>SAAT</span>
+    </h2>
+
+    <div class="clock" id="clock">
+        00<span>:</span>00<span>:</span>00
+    </div>
+
+    <div class="date" id="date">
+        Yükleniyor...
+    </div>
+
+</section>
+
+<section class="instagramSection" id="instagram">
+
+    <div class="instagramBox">
+
+        <h2>
+            ROMAN <span>FK</span>
+        </h2>
+
+        <p>
+            Roman FK'nın paylaşımlarını Instagram'dan takip et.
+        </p>
+
+        <a
+            href="https://www.instagram.com/romanfk3535/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn instagram"
+        >
+            📸 INSTAGRAM'A GİT
+        </a>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <strong>Roman FK</strong>
+    — Roman FK hakları gizlidir.
+
+</footer>
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    onValue,
+    onDisconnect
+}
+from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyD-_DwxDroNAau2_74LU85roUbsEAUq3CE",
+
+    authDomain:
+        "roman-fk.firebaseapp.com",
+
+    databaseURL:
+        "https://roman-fk-default-rtdb.firebaseio.com",
+
+    projectId:
+        "roman-fk",
+
+    storageBucket:
+        "roman-fk.firebasestorage.app",
+
+    messagingSenderId:
+        "850334181959",
+
+    appId:
+        "1:850334181959:web:2a27ec31117509fde35f62",
+
+    measurementId:
+        "G-95TEP4HFP9"
+};
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const db =
+    getDatabase(
+        app
+    );
+
+/* TOPLAM ZİYARETÇİ */
+
+const visitorRef =
+    ref(
+        db,
+        "visitors/total"
+    );
+
+get(visitorRef)
+.then(snapshot => {
+
+    let total =
+        snapshot.exists()
+        ? snapshot.val()
+        : 0;
+
+    total++;
+
+    return set(
+        visitorRef,
+        total
+    );
+
+})
+.catch(error => {
+
+    console.log(
+        "Ziyaretçi sayacı hatası:",
+        error
+    );
+
+});
+
+onValue(
+    visitorRef,
+    snapshot => {
+
+        const total =
+            snapshot.val() || 0;
+
+        const element =
+            document.getElementById(
+                "visitorCount"
+            );
+
+        if(element){
+
+            element.textContent =
+                total.toLocaleString(
+                    "tr-TR"
+                );
+
+        }
+
+    }
+);
+
+/* ONLINE KULLANICI */
+
+const uid =
+    "user_" +
+    Date.now() +
+    "_" +
+    Math.random()
+        .toString(36)
+        .substring(2,10);
+
+const onlineRef =
+    ref(
+        db,
+        "online/" + uid
+    );
+
+set(
+    onlineRef,
+    true
+);
+
+onDisconnect(
+    onlineRef
+).remove();
+
+/* ONLINE SAYISI */
+
+const onlineRefAll =
+    ref(
+        db,
+        "online"
+    );
+
+onValue(
+    onlineRefAll,
+    snapshot => {
+
+        const users =
+            snapshot.val();
+
+        let count = 0;
+
+        if(users){
+
+            count =
+                Object.keys(
+                    users
+                ).length;
+
+        }
+
+        const element =
+            document.getElementById(
+                "onlineCount"
+            );
+
+        if(element){
+
+            element.textContent =
+                count;
+
+        }
+
+    }
+);
+
+/* CANLI SAAT */
+
+function updateClock(){
+
+    const now =
+        new Date();
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const seconds =
+        String(
+            now.getSeconds()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const clock =
+        document.getElementById(
+            "clock"
+        );
+
+    if(clock){
+
+        clock.innerHTML =
+
+            hours +
+
+            "<span>:</span>" +
+
+            minutes +
+
+            "<span>:</span>" +
+
+            seconds;
+
+    }
+
+    const date =
+        document.getElementById(
+            "date"
+        );
+
+    if(date){
+
+        date.textContent =
+
+            now.toLocaleDateString(
+                "tr-TR",
+                {
+                    weekday:"long",
+                    year:"numeric",
+                    month:"long",
+                    day:"numeric"
+                }
+            );
+
+    }
+
+}
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+/* SCROLL ANİMASYONLARI */
+
+const elements =
+    document.querySelectorAll(
+        ".aboutCard, .league, .card, .instagramBox"
+    );
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+
+            entries.forEach(
+                entry => {
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target.classList.add(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.15
+        }
+    );
+
+elements.forEach(
+    element => {
+
+        observer.observe(
+            element
+        );
+
+    }
+);
+
+</script>
+
+</body>
+</html>
